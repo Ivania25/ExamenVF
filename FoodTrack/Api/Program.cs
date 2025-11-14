@@ -1,0 +1,13 @@
+using FoodTrack.Domain.Services;
+using FoodTrack.Domain.Interfaces;
+using FoodTrack.Infrastructure;
+var builder=WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IOrderRepository,InMemoryOrderRepository>();
+builder.Services.AddSingleton<IFoodTruckRepository,InMemoryFoodTruckRepository>();
+builder.Services.AddSingleton<IEventLogRepository,InMemoryEventLogRepository>();
+builder.Services.AddSingleton<TotalCalculator>();
+builder.Services.AddSingleton<OrderService>();
+builder.Services.AddControllers();
+var app=builder.Build();
+app.MapControllers();
+app.Run();
